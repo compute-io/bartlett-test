@@ -2,8 +2,19 @@ bartlett-test
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Compute Bartlett’s test for equal variances.
+> Compute [Bartlett’s test](https://en.wikipedia.org/wiki/Bartlett%27s_test) for equal variances.
 
+[Bartlett's test](https://en.wikipedia.org/wiki/Bartlett%27s_test) is used to test the null hypothesis that the variances of k groups are equal against the alternative that at least two of them are different.
+
+For `k` groups each with `n_i` observations, the test statistic is
+
+<div class="equation" align="center" data-raw-text="
+    \chi^2 = \frac{N\ln(S^2) - \sum_{i=0}^{k-1} n_i \ln(S_i^2)}{1 + \frac{1}{3(k-1)}\left(\sum_{i=0}^{k-1} \frac{1}{n_i} - \frac{1}{N}\right)}" data-equation="eq:bartlett-test-statistic">
+	<img src="" alt="Equation for Bartlett's test statistic.">
+	<br>
+</div>
+
+where `N = \sum_{i=0}^{k-1} n_i` is the total number of observations, `S_i` are the biased group-level variances and `S^2` is a (biased) pooled estimate for the variance.
 
 ## Installation
 
@@ -17,10 +28,10 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 ## Usage
 
 ``` javascript
-var foo = require( 'compute-bartlett-test' );
+var bartlett = require( 'compute-bartlett-test' );
 ```
 
-#### foo( arr )
+#### bartlett( a,b[c,...,k] )
 
 What does this function do?
 
@@ -28,7 +39,7 @@ What does this function do?
 ## Examples
 
 ``` javascript
-var foo = require( 'compute-bartlett-test' );
+var bartlett = require( 'compute-bartlett-test' );
 ```
 
 To run the example code from the top-level application directory,
@@ -74,7 +85,7 @@ $ make view-cov
 
 ## Copyright
 
-Copyright &copy; 2015. The Compute.io Authors.
+Copyright &copy; 2014-2015. The [Compute.io](https://github.com/compute-io) Authors.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-bartlett-test.svg
