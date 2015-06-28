@@ -10,11 +10,11 @@ For `k` groups each with `n_i` observations, the test statistic is
 
 <div class="equation" align="center" data-raw-text="
     \chi^2 = \frac{N\ln(S^2) - \sum_{i=0}^{k-1} n_i \ln(S_i^2)}{1 + \frac{1}{3(k-1)}\left(\sum_{i=0}^{k-1} \frac{1}{n_i} - \frac{1}{N}\right)}" data-equation="eq:bartlett-test-statistic">
-	<img src="" alt="Equation for Bartlett's test statistic.">
+	<img src="https://cdn.rawgit.com/compute-io/bartlett-test/2f862b1003eb85c1b347d52555e215b074355312/docs/img/eqn.svg" alt="Equation for Bartlett's test statistic.">
 	<br>
 </div>
 
-where `N = \sum_{i=0}^{k-1} n_i` is the total number of observations, `S_i` are the biased group-level variances and `S^2` is a (biased) pooled estimate for the variance.
+where `N = \sum_{i=0}^{k-1} n_i` is the total number of observations, `S_i` are the biased group-level variances and `S^2` is a (biased) pooled estimate for the variance. Under the null hyptohesis, the test statistic follows a *chi-square* distribution with `df = k - 1` degrees of freedom.
 
 ## Installation
 
@@ -33,13 +33,25 @@ var bartlett = require( 'compute-bartlett-test' );
 
 #### bartlett( a,b[c,...,k] )
 
-What does this function do?
-
+For input arrays `a`, `b`, ... holding numeric observations, this function calculates Bartlett's test, which tests the null hypothesis that the variances in all `k` groups are the same. The function returns an object holding the calculated test statistic `T`, the `pValue` of the test and the degrees of freedom (`df`).
 
 ## Examples
 
 ``` javascript
-var bartlett = require( 'compute-bartlett-test' );
+var bartlett = require( 'compute-bartlett-test' ),
+	a, 
+	b, 
+	out;
+
+a = [ 1, 2, 3 ];
+b = [ 1, 4, 2 ];
+
+out = bartlett( a, b )
+/* 
+returns { T: 0.27896541943164443,
+	  df: 1,
+	  pValue: 0.5973801205246243 }
+*/
 ```
 
 To run the example code from the top-level application directory,
@@ -85,7 +97,7 @@ $ make view-cov
 
 ## Copyright
 
-Copyright &copy; 2014-2015. The [Compute.io](https://github.com/compute-io) Authors.
+Copyright &copy; 2015. The [Compute.io](https://github.com/compute-io) Authors.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-bartlett-test.svg
